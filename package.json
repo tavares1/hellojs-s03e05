@@ -1,0 +1,30 @@
+{
+  "name": "hellojs-s03e05",
+  "version": "1.0.0",
+  "description": "5º repositório do curso de Javascript (HelloJS v03)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tavares1/hellojs-s03e05.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tavares1/hellojs-s03e05/issues"
+  },
+  "homepage": "https://github.com/tavares1/hellojs-s03e05#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.15.5",
+    "global": "^4.3.2",
+    "knex": "^0.13.0",
+    "sqlite3": "^3.1.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}

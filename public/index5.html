@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- index5.html -->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello, vue!</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+    <form @submit.prevent="dosave">
+      <fieldset>
+        <legend>Detalhe contato <span v-if="detalhe.idcontato"> #{{detalhe.idcontato}}</span></legend>
+        <label>Nome <input v-model="detalhe.nomecontato"/></label><br/>
+        <label>Endereço <input v-model="detalhe.enderecocontato"/></label><br/>
+        <label>Telefone <input v-model="detalhe.telefonecontato"/></label><br/>
+        <input type="submit" value="salvar" />
+      </fieldset>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>endereço</th>
+          <th>Telefone</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="contato in lista">
+          <td>{{contato.idcontato}}</td>
+          <td>{{contato.nomecontato}}</td>
+          <td>{{contato.enderecocontato}}</td>
+          <td>{{contato.telefonecontato}}</td>
+          <td>
+            <button @click="editar(contato)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const novocontato = _ => ({
+      nomecontato: "",
+      enderecocontato: "",
+      telefonecontato: "",
+    })
+    new Vue({
+      el: document.getElementById("app"),
+      data: {
+        detalhe: novocontato(),
+        lista: []
+      },
+      methods: {
+        dosave() {
+          if (!this.detalhe.idcontato) {
+            this.detalhe.idcontato = new Date().getTime()
+            this.lista.push(this.detalhe)
+          }
+          this.detalhe = novocontato()
+        },
+        editar(contato) {
+          this.detalhe = contato;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
