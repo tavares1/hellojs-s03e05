@@ -19,7 +19,7 @@
       <input placeholder="Nome" class="form-control  mb-2 mr-sm-2 mb-sm-0" v-model="detalhe.nomecontato" />
       <input placeholder="Endereço" class="form-control  mb-2 mr-sm-2 mb-sm-0" v-model="detalhe.enderecocontato " />
       <input placeholder="Telefone" class="form-control  mb-2 mr-sm-2 mb-sm-0" v-model="detalhe.telefonecontato" />
-      <input type="submit" value="Salvar" class="btn btn-primary" />
+      <input type="submit" value="Salvar" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0" />
     </form>
     <br>
     <table class="table">
@@ -40,10 +40,13 @@
           <td>{{contato.enderecocontato}}</td>
           <td>{{contato.telefonecontato}}</td>
           <td>
-            <button @click="editar(contato)" class="btn btn-outline-primary">Editar</button>
+            <button v-on:click="editar(contato)" class="btn btn-outline-primary">Editar</button>
           </td>
           <td>
-            <button @click="excluir(contato)" class="btn btn-outline-danger">Excluir</button>
+            <form @submit.prevent=excluir(contato)>
+              <input type="hidden" v-model="detalhe.idcontato">
+              <button type="submit" class="btn btn-outline-danger">Excluir</button>
+            </form>
           </td>
         </tr>
       </tbody>
@@ -58,7 +61,6 @@
     })
 
     const api = axios.create({
-      // se você abrir o index6.html em 127.0.0.1, tem que mudar aqui de localhost para 127.0.0.1 aqui
       baseURL: "http://localhost:3000"
     })
 
@@ -75,15 +77,14 @@
       methods: {
         dosave() {
           api[this.detalhe.idcontato ? "put" : "post"]("/save", this.detalhe).then(ret => {
-            console.log(ret.data)
             this.detalhe = novocontato()
             this.listcontatos()
           })
         },
         excluir(contato) {
-          api.delete("/delete", contato).then(ret => {
-            console.log(this.detalhe)
-            console.log(ret.data)
+          api({method:'delete',url: '/delete',data:{idcontato:contato.idcontato}}).then(ret=>{
+            console.log(ret)
+            this.listcontatos()
           })
         },
         editar(contato) {
