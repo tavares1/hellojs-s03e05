@@ -17,7 +17,6 @@ app.put("/save", (req, res) =>
   knex("contato").update(req.body)
   .where("idcontato", req.body.idcontato).then(ret => res.send("OK-" + ret)))
 app.delete("/delete",(req,res) => {
-  console.log(req)
   knex("contato").where("idcontato",req.body.idcontato).del().then(ret => res.send("EXCLUIDO")).catch((err)=>console.log(err))
 })
 

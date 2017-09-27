@@ -43,10 +43,7 @@
             <button v-on:click="editar(contato)" class="btn btn-outline-primary">Editar</button>
           </td>
           <td>
-            <form @submit.prevent=excluir(contato)>
-              <input type="hidden" v-model="detalhe.idcontato">
-              <button type="submit" class="btn btn-outline-danger">Excluir</button>
-            </form>
+              <button v-on:click="excluir(contato)" type="submit" class="btn btn-outline-danger">Excluir</button>
           </td>
         </tr>
       </tbody>
